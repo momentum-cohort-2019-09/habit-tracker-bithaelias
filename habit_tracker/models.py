@@ -14,7 +14,6 @@ class Habit(models.Model):
     user = models.ForeignKey(to='User', related_name="habits", on_delete=models.CASCADE, blank=True, null=True)
     habit = models.CharField(max_length=255, blank=True, null=True)
     goal = models.PositiveIntegerField(blank=True, null=True)
-    count = models.PositiveIntegerField(blank=True, null=True)
     note = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -25,7 +24,8 @@ class Habit(models.Model):
 class Journal(models.Model):
     habit = models.ForeignKey(to='Habit', related_name='journal', on_delete=models.CASCADE, blank=True, null=True)
     note = models.TextField(blank=True, null=True)
-    met_goal = models.PositiveIntegerField(blank=True, null=True)
+    count = models.PositiveIntegerField(null=True, blank=True)
+    met_goal = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -12,7 +12,19 @@
 </div>
 <div class="journal">
     {% for journal in habit.journal.all %}
-    <p>{{journal}}</p>
+    <p>{{journal.note}}</p>
+
+    {% if journal.count %}
+    <p>{{journal.count}}</p>
+    {% else %}
+    {% endif %}
+
+    {% if journal.met_goal %}
+    <p>You met your goal!</p>
+    {% else %}
+    <p>Keep trying until you reach your goal</p>
+    {% endif %}
+
     {% endfor %}
 </div>
 <div>

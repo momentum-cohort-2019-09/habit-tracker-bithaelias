@@ -7,11 +7,10 @@ class HabitForm(forms.ModelForm):
 
     class Meta:
         model = Habit
-        fields = ['habit', 'goal', 'count', 'note']
+        fields = ['habit', 'goal', 'note']
         labels = {
             'habit': 'NAME YOUR HABIT',
             'goal': 'SET YOUR GOAL',
-            'count': 'DEFAULT COUNT',
             'note': 'ADD A NOTE',
         }
         
@@ -24,7 +23,7 @@ class HabitForm(forms.ModelForm):
 class JournalForm(forms.ModelForm):
     class Meta:
         model = Journal
-        fields = ['note', 'met_goal']        
+        fields = ['note', 'count','met_goal']        
         
     
 
