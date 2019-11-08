@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<button class="btn-habit"><a href="{% url 'create_habit' %}">Create a new Habit</a></button>
+
+<div class="habits">
+
+
+    {% for habit in all_habits %}
+
+    <a href="{% url 'create_a_journal' habit.pk %}" style="text-decoration: none;">
+        <div class="habit">
+            <p>{{habit.habit}}</p>
+
+            <p>Goal: {{habit.goal}} times per day</p>
+
+            <p>{{habit.created_at}}</p>
+
+
+        </div>
+    </a>
+
+    {% endfor %}
+</div>
+
+{% endblock %}

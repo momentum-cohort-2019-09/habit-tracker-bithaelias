@@ -1,30 +1,35 @@
 from django.db import models
 from django.utils import timezone
+from datetime import datetime
 from django.contrib.auth.models import AbstractUser
+
+
 
 # Create your models here.
 class User(AbstractUser):
     is_registered = models.BooleanField(default=False)
-
+    
     
 class Habit(models.Model):
     user = models.ForeignKey(to='User', related_name="habits", on_delete=models.CASCADE, blank=True, null=True)
-    goal = models.TextField()
-    title = models.CharField(max_length=255, blank=False, null=False)
-    
-    created_at = models.DateTimeField(default=timezone.now)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    habit = models.CharField(max_length=255, blank=True, null=True)
+    goal = models.PositiveIntegerField(blank=True, null=True)
+    count = models.PositiveIntegerField(blank=True, null=True)
+    note = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title
+        return self.note
 
-class Log(models.Model):
-    habit = models.ForeignKey(to='Habit', related_name='logs', on_delete=models.CASCADE, blank=True, null=True)
-    description = models.TextField()
-    amount = models.PositiveIntegerField(blank=False, null=True)
-    achievement = models.TextField()
-    created_at = models.DateTimeField(default=timezone.now)
-    updated_at = models.DateTimeField(blank=True, null=True)
+class Journal(models.Model):
+    habit = models.ForeignKey(to='Habit', related_name='journal', on_delete=models.CASCADE, blank=True, null=True)
+    note = models.TextField(blank=True, null=True)
+    met_goal = models.PositiveIntegerField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.description
+        return self.note
+
+   
