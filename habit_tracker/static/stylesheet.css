@@ -25,6 +25,9 @@
 	align-items: center;
 	flex-wrap: nowrap;
 }
+/* .habit a {
+} */
+
 .habits {
 	display: flex;
 	flex-direction: column;
@@ -32,4 +35,15 @@
 	align-content: center;
 	align-items: center;
 	flex-wrap: nowrap;
+}
+.days {
+	display: flex;
+	flex-direction: row;
+
+	align-content: center;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+.day {
+	width: 10%;
 }

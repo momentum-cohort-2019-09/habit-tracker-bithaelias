@@ -12,11 +12,13 @@
 </head>
 
 <body>
-    <nav class="nav">
-        <h1>Habit Tracker</h1>
-        <a class="sign-in" href="{% url 'auth_login' %}">Log in |</a>
-        <a href="{% url 'auth_logout' %}">Logout</a>
-    </nav>
+    <a href="/" style="text-decoration: none;">
+        <nav class="nav">
+            <h1>Habit Tracker</h1>
+            <a class="sign-in" href="{% url 'auth_login' %}" style="text-decoration: none;">Log in |</a>
+            <a href="{% url 'auth_logout' %}" style="text-decoration: none;">Logout</a>
+        </nav>
+    </a>
 
     {% block content %}
     {%  endblock %}

@@ -15,7 +15,7 @@
     <p>{{journal.note}}</p>
 
     {% if journal.count %}
-    <p>{{journal.count}}</p>
+    <p>Number of time per day {{journal.count}}</p>
     {% else %}
     {% endif %}
 
@@ -24,7 +24,8 @@
     {% else %}
     <p>Keep trying until you reach your goal</p>
     {% endif %}
-
+    <p>Journal Created: {{journal.created_at.time}}</p>
+    <p>Journal Updated: {{journal.updated_at}}</p>
     {% endfor %}
 </div>
 <div>

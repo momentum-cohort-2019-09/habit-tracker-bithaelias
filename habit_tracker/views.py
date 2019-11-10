@@ -1,4 +1,4 @@
-
+import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
@@ -10,10 +10,20 @@ from habit_tracker.forms import HabitForm, JournalForm
 
 
 @login_required
-def home_habits(request): 
+def home_habits(request, **kwargs): 
   user = request.user
-  all_habits = Habit.objects.all()
-  return render(request, "habit_tracker/home.html", {"all_habits": all_habits, "user": user })
+  journal = Journal.objects.filter()
+  all_habits = Habit.objects.all().order_by('created_at')
+  oldest_habit_date = all_habits.first().created_at
+  newest_habit_date = all_habits.last().created_at
+  date_list =[]
+  current_date = oldest_habit_date
+  while current_date <= datetime.datetime.today():
+    date_list.append(current_date)
+    current_date += datetime.timedelta(days=1)
+  return render(request, "habit_tracker/home.html", {"all_habits": all_habits, 
+                        "user": user, "oldest": oldest_habit_date, 
+                        "newest": newest_habit_date, "date_list": date_list, "journal": journal})
 
 
 @login_required
@@ -41,5 +51,7 @@ def create_a_journal(request, pk):
   else:
     form = JournalForm()
     return render(request, "habit_tracker/journal.html", {"habit": habit, "form": form})
+
+
 
 

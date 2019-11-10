@@ -1,26 +1,48 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<button class="btn-habit"><a href="{% url 'create_habit' %}">Create a new Habit</a></button>
+<button class="btn-habit"><a href="{% url 'create_habit' %}" style="text-decoration: none;">Create a new
+        Habit</a></button>
+<div class="days">
+
+    {% for date in date_list%}
+
+    <div class="day">Day {{date.day}}
+        {% for field in journal %}
+        {% if field.count >= 0 %}
+        <p>Count: {{ field.count }}</p>
+        {% else %}
+        <p>Keep trying!</p>
+        {% endif %}
+
+        {% endfor %}
+    </div>
+
+    {% endfor %}
+
+    <!-- {{oldest}}
+    {{newest}}
+    {{date_list}} -->
+</div>
 
 <div class="habits">
 
-
     {% for habit in all_habits %}
 
-    <a href="{% url 'create_a_journal' habit.pk %}" style="text-decoration: none;">
-        <div class="habit">
+    <div class="habit"><a href="{% url 'create_a_journal' habit.pk %}" style="text-decoration: none;">
             <p>{{habit.habit}}</p>
-
             <p>Goal: {{habit.goal}} times per day</p>
-
+            <p>Count: {{journal.count}}</p>
             <p>{{habit.created_at}}</p>
+            {% if habit.observers %}
+            {% for observer in habit.observers.all %}
+            <p>{{observer.username}}</p>
+            {% endfor %}
+            {% endif %}
 
-
-        </div>
-    </a>
-
+        </a></div>
     {% endfor %}
+
 </div>
 
 {% endblock %}

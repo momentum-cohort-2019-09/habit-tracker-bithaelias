@@ -17,9 +17,13 @@ class Habit(models.Model):
     note = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    observers = models.ManyToManyField(to='User', related_name="habits_observing", blank=True)
 
     def __str__(self):
         return self.note
+
+    class Meta:
+        unique_together = ("user", "habit")    
 
 class Journal(models.Model):
     habit = models.ForeignKey(to='Habit', related_name='journal', on_delete=models.CASCADE, blank=True, null=True)
