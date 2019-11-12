@@ -38,16 +38,22 @@ def create_habit(request):
  return render(request, "habit_tracker/create_habit.html", {"form": form })
 
 @login_required
+def habit_details(request, pk):
+  habit = get_object_or_404(Habit, pk=pk)
+  return render(request, "habit_tracker/habit_details.html",
+                {"habit": habit})  
+
+@login_required
 def create_a_journal(request, pk): 
   habit = Habit.objects.get(pk=pk)
   if request.method =="POST":
     form = JournalForm(request.POST)
     if form.is_valid():
-      journal = form.save(commit=False)
+      journal = form.save()
       journal.author = request.user
       journal.habit = habit
       journal.save()
-      return redirect(to='create_a_journal', pk=pk)
+      return redirect(to='create_a_habit', pk=pk)
   else:
     form = JournalForm()
     return render(request, "habit_tracker/journal.html", {"habit": habit, "form": form})

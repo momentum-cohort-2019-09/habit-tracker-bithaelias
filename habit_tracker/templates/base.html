@@ -7,18 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- <link rel="stylesheet" href="https://cdn.shoelace.style/1.0.0-beta24/shoelace.css"> -->
+    <link href="https://fonts.googleapis.com/css?family=Muli|Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static '/stylesheet.css' %}">
     <title>Habit Tracker</title>
 </head>
 
 <body>
-    <a href="/" style="text-decoration: none;">
-        <nav class="nav">
+
+    <nav class="nav">
+        <a href="/" style="text-decoration: none;">
             <h1>Habit Tracker</h1>
+        </a>
+        <div class="login">
             <a class="sign-in" href="{% url 'auth_login' %}" style="text-decoration: none;">Log in |</a>
             <a href="{% url 'auth_logout' %}" style="text-decoration: none;">Logout</a>
-        </nav>
-    </a>
+        </div>
+    </nav>
+
 
     {% block content %}
     {%  endblock %}

@@ -23,7 +23,10 @@ class HabitForm(forms.ModelForm):
 class JournalForm(forms.ModelForm):
     class Meta:
         model = Journal
-        fields = ['note', 'count','met_goal']        
+        fields = ['note', 'count','met_goal']  
+        widgets = { 
+            'met_goal': forms.CheckboxInput(attrs={'class':'met_goal'}),
+        }       
         
     
 

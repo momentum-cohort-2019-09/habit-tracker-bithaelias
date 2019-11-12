@@ -22,5 +22,6 @@ urlpatterns = [
     path('', views.home_habits, name='home'),
     path('habit_tracker/new/', views.create_habit, name='create_habit'),
     path('habit_tracker/<int:pk>/create_a_journal/',views.create_a_journal, name='create_a_journal'),
+    path('habit_tracker/<int:pk>/habit_details', views.habit_details, name='habit_details'), 
     path('admin/', admin.site.urls),
 ]

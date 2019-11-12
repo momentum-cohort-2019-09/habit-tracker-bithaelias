@@ -1,41 +1,46 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="habit">
-    <p>{{habit.habit}}</p>
 
-    <p>Goal: {{habit.goal}} times per day</p>
+<div class="journal-details">
+    <div class="habit-journal">
+        <h3>{{habit.habit}}</h3>
 
-    <p>{{habit.created_at}}</p>
+        <p>Goal: {{habit.goal}} times per day</p>
+
+        <p>{{habit.created_at}}</p>
 
 
-</div>
-<div class="journal">
-    {% for journal in habit.journal.all %}
-    <p>{{journal.note}}</p>
+    </div>
+    <div class="journal">
+        {% for journal in habit.journal.all %}
+        <p>{{journal.note}}</p>
 
-    {% if journal.count %}
-    <p>Number of time per day {{journal.count}}</p>
-    {% else %}
-    {% endif %}
+        {% if journal.count %}
+        <p>Number of time per day {{journal.count}}</p>
+        {% else %}
+        {% endif %}
 
-    {% if journal.met_goal %}
-    <p>You met your goal!</p>
-    {% else %}
-    <p>Keep trying until you reach your goal</p>
-    {% endif %}
-    <p>Journal Created: {{journal.created_at.time}}</p>
-    <p>Journal Updated: {{journal.updated_at}}</p>
-    {% endfor %}
-</div>
-<div>
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        ​
-        <button type="submit">Save</button>
-        ​
-    </form>
+        {% if journal.met_goal %}
+        <p>You met your goal!</p>
+        {% else %}
+        <p>Keep trying until you reach your goal</p>
+        {% endif %}
+        <p>Journal Created: {{journal.created_at.time}}</p>
+        <p>Journal Updated: {{journal.updated_at}}</p>
+        {% endfor %}
+    </div>
+    <div class="journal-form-flex">
+        <form class="journal-form" action="" method="POST">
+            {% csrf_token %}
+            {{form.as_table}}
+
+
+            ​
+            <button type="submit">Save</button>
+            ​
+        </form>
+    </div>
 </div>
 
 
